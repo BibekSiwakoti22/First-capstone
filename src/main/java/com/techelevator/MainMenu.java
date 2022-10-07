@@ -9,9 +9,6 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-//    public MainMenu(String itemName, double itemPrice, double currentMoney) {
-//        super(itemName, itemPrice, currentMoney);
-//    }
 
 
     public static void main(String[] args) {
