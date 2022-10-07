@@ -19,15 +19,14 @@ public class MainMenu {
 
         boolean running = true;
         while (running) {
-            System.out.println("Input a choice from below as a single number");
-            System.out.println("(1) Display Vending Machine Items");
-            System.out.println("(2) Purchase");
-            System.out.println("(3) Exit");
-
+            System.out.println("Welcome to Tech Elevator Vending Machine");
+            System.out.println("Please enter 1 To Display Vending Machine Items");
+            System.out.println("Please enter 2 To Purchase");
+            System.out.println("Please enter 3 To  Exit");
             String input = keyboard.nextLine();
 
             if (input.equals("1")){
-                createInventory();
+               createInventory();
             }
 
             if(input.equals("2")){
@@ -35,7 +34,6 @@ public class MainMenu {
                 boolean purchasing = true;
                 while(purchasing) {
                     System.out.println("Your current money is " + getCurrentMoney());
-
                     System.out.println("Pick an option from below.");
                     System.out.println("(1) Feed Money");
                     System.out.println("(2) Select Product");
