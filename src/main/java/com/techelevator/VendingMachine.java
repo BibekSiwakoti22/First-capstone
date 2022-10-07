@@ -21,11 +21,11 @@ public class VendingMachine {
     static String pathIn = "C:\\Users\\Student\\workspace\\capstones\\java-purple-minicapstonemodule1-team4\\vendingmachine.csv";
     static File vending = new File(pathIn);
 
-    public static void createInventory(){
+    public static void createInventory() {
         try (FileReader inventory = new FileReader(vending);
              Scanner fileScanner = new Scanner(vending)) {
             String line = "";
-            while (fileScanner.hasNextLine()){
+            while (fileScanner.hasNextLine()) {
                 line = fileScanner.nextLine();
                 String[] productValues = line.split("\\|");
                 String slot = productValues[0];
@@ -34,20 +34,17 @@ public class VendingMachine {
                 BigDecimal price = BigDecimal.valueOf(tempPrice);
                 String type = productValues[3];
                 Products temp = null;
-                if (type.equals("Gum")){
+                if (type.equals("Gum")) {
                     Gum newGum = new Gum(itemName, price, type);
                     temp = newGum;
-                }
-                else if(type.equals("Chip")){
+                } else if (type.equals("Chip")) {
                     Chips newChips = new Chips(itemName, price, type);
                     temp = newChips;
-                }
-                else if (type.equals("Drink")){
+                } else if (type.equals("Drink")) {
                     Drinks newDrink = new Drinks(itemName, price, type);
                     temp = newDrink;
-                }
-                else if (type.equals("Candy")){
-                    Candy newCandy = new Candy (itemName, price, type);
+                } else if (type.equals("Candy")) {
+                    Candy newCandy = new Candy(itemName, price, type);
                     temp = newCandy;
                 }
                 inventoryMap.put(slot, temp);
@@ -60,7 +57,7 @@ public class VendingMachine {
 
     }
 
-    public static BigDecimal feedMoney(){
+    public static BigDecimal feedMoney() {
         try {
             System.out.println("Your current money is " + getCurrentMoney());
             System.out.println("How much money do you want to feed?");
@@ -68,36 +65,37 @@ public class VendingMachine {
 
             currentMoney = getCurrentMoney().add(input);
 
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             n.printStackTrace();
         } finally {
             return currentMoney;
         }
     }
 
-    public static void selectProduct(){
+    public static void selectProduct() {
+        // do not create inventory every time, put into constructor of vending machine?
         createInventory();
         printInventory();
 
         System.out.println("Input key of item to purchase");
         String input = keyboard.nextLine();
+        // check if sold out first, may enter ifs
         currentMoney = getCurrentMoney().subtract(inventoryMap.get(input).getItemPrice());
         System.out.println(currentMoney);
+        // create temp product equal to inventoryMap.get(input)
+        // check if there's enough money
 
-        if(inventoryMap.get(input).getType().equals("Chip")){
+        if (inventoryMap.get(input).getType().equals("Chip")) {
+            // if Products.updateInventory returns true then print
             System.out.println("Crunch Crunch, Yum!");
-        }
-        else if(inventoryMap.get(input).getType().equals("Drink")) {
+        } else if (inventoryMap.get(input).getType().equals("Drink")) {
             System.out.println("Glug Glug, Yum!");
-        }
-        else if(inventoryMap.get(input).getType().equals("Gum")) {
+        } else if (inventoryMap.get(input).getType().equals("Gum")) {
             System.out.println("Chew Chew, Yum!");
-        }
-        else if(inventoryMap.get(input).getType().equals("Candy")) {
+        } else if (inventoryMap.get(input).getType().equals("Candy")) {
             System.out.println("Munch Munch, Yum!");
         }
-        }
-
+    }
 
     public static void printInventory(){
         createInventory();
@@ -105,6 +103,7 @@ public class VendingMachine {
             System.out.println(itemKey + " | " + inventoryMap.get(itemKey).getItemName() + " | " + inventoryMap.get(itemKey).getItemPrice() + " | " + inventoryMap.get(itemKey).getType());
         }
     }
+
 
     public static BigDecimal getCurrentMoney() {
         return currentMoney;
