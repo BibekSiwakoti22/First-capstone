@@ -18,7 +18,7 @@ public class VendingMachine {
 
     static Scanner keyboard = new Scanner(System.in);
     static Map<String, Products> inventoryMap = new HashMap<>();
-    static String pathIn = "C:\\Users\\Student\\workspace\\capstones\\java-purple-minicapstonemodule1-team4\\vendingmachine.csv";
+    static String pathIn = "vendingmachine.csv";
     static File vending = new File(pathIn);
 
     public static void createInventory() {
