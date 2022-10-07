@@ -1,17 +1,26 @@
 package com.techelevator;
 
-public class Gum extends Products implements purchasable{
-    public Gum(String itemName, double itemPrice) {
-        super(itemName, itemPrice);
+import java.math.BigDecimal;
+
+public class Gum extends Products{
+
+    private String type = "Gum";
+
+    public Gum(String itemName, BigDecimal itemPrice, String type) {
+        super(itemName, itemPrice, type);
     }
 
-    @Override
-    public String message() {
-        return "Chew Chew, Yum!";
-    }
+//    @Override
+//    public String message() {
+//        return "Chew Chew, Yum!";
+//    }
+//
+//    @Override
+//    public BigDecimal updatingCurrentMoney() {
+//        return null;
+//    }
 
-    @Override
-    public double updatingCurrentMoney() {
-        return 0;
+    public String getType() {
+        return type;
     }
 }

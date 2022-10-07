@@ -3,19 +3,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class MainMenu extends Products {
+public class MainMenu extends VendingMachine {
 
-    public MainMenu(String itemName, double itemPrice, double currentMoney) {
-        super(itemName, itemPrice, currentMoney);
-    }
 
 
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
 
         boolean running = true;
         while (running) {
@@ -26,7 +23,7 @@ public class MainMenu extends Products {
             String input = keyboard.nextLine();
 
             if (input.equals("1")){
-               createInventory();
+               printInventory();
             }
 
             if(input.equals("2")){
