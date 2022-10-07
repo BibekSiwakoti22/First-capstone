@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class MainMenu {
+public class MainMenu extends Products {
 
-//    public MainMenu(String itemName, double itemPrice, double currentMoney) {
-//        super(itemName, itemPrice, currentMoney);
-//    }
+    public MainMenu(String itemName, double itemPrice, double currentMoney) {
+        super(itemName, itemPrice, currentMoney);
+    }
 
 
     public static void main(String[] args) {
