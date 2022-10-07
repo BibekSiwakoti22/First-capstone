@@ -1,19 +1,21 @@
 package com.techelevator;
 
-public class Candy extends Products implements purchasable{
+import java.math.BigDecimal;
 
+public class Candy extends Products{
 
-    public Candy(String itemName, double itemPrice) {
-        super(itemName, itemPrice);
+    private String type = "Candy";
+
+    public Candy(String itemName, BigDecimal itemPrice, String type) {
+        super(itemName, itemPrice, type);
     }
 
-    @Override
-    public String message() {
-        return "Munch Munch, Yum!";
-    }
+//    @Override
+//    public static String message() {
+//        return "Munch Munch, Yum!";
+//    }
 
-    @Override
-    public double updatingCurrentMoney() {
-        return 0;
+    public String getType() {
+        return type;
     }
 }

@@ -1,19 +1,26 @@
 package com.techelevator;
 
-public class Chips extends Products implements purchasable {
+import java.math.BigDecimal;
 
+public class Chips extends Products {
 
-    public Chips(String itemName, double itemPrice) {
-        super(itemName, itemPrice);
+    private String type = "Chip";
+
+    public Chips(String itemName, BigDecimal itemPrice, String type) {
+        super(itemName, itemPrice, type);
     }
 
-    @Override
-    public String message() {
-        return "Crunch Crunch, Yum!";
-    }
+//    @Override
+//    public String message() {
+//        return "Crunch Crunch, Yum!";
+//    }
+//
+//    @Override
+//    public BigDecimal updatingCurrentMoney() {
+//        return  getCurrentMoney().subtract(getItemPrice());
+//    }
 
-    @Override
-    public double updatingCurrentMoney() {
-        return  - getItemPrice();
+    public String getType() {
+        return type;
     }
 }
