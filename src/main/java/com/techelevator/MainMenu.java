@@ -31,7 +31,7 @@ public class MainMenu extends VendingMachine {
                 boolean purchasing = true;
                 while(purchasing) {
                     System.out.println("Your current money is " + getCurrentMoney());
-                    System.out.println("Pick an option from below.");
+                    System.out.println("Choose a option from below.");
                     System.out.println("(1) Feed Money");
                     System.out.println("(2) Select Product");
                     System.out.println("(3) Finish Transaction");
