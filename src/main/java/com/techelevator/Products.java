@@ -13,13 +13,32 @@ public abstract class Products extends VendingMachine {
 
     private String itemName;
     private BigDecimal itemPrice;
-    private final int MAX_AMOUNT = 5;
     private String type;
+    private int amount;
 
     public Products(String itemName, BigDecimal itemPrice, String type) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.type = type;
+        this.amount = 5;
+    }
+
+    public boolean updateInventory(){
+        int newAmount = getAmount() - 1;
+        setAmount(newAmount);
+        if(newAmount <= 0){
+            System.out.println("Item is sold out, sorry!");
+            return false;
+        }
+        return true;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getItemName() {
