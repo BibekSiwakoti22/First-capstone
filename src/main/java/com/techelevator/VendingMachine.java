@@ -18,8 +18,7 @@ public class VendingMachine {
 
     static Scanner keyboard = new Scanner(System.in);
     static Map<String, Products> inventoryMap = new HashMap<>();
-    static String pathIn = "vendingmachine.csv";
-    static File vending = new File(pathIn);
+    static File vending = new File("pathIn");
 
     public static void createInventory() {
         try (FileReader inventory = new FileReader(vending);
