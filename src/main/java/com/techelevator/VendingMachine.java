@@ -1,27 +1,29 @@
 package com.techelevator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-// Decrease inventory from 5 when purchasing
-// Create message for if sold out
 // Unit Testing
-public class VendingMachine {
+// Log
+public class VendingMachine  {
 
-    private static BigDecimal currentMoney = BigDecimal.valueOf(2);
+    private BigDecimal currentMoney = BigDecimal.valueOf(2);
 
+    private Scanner keyboard;
+    private Map<String, Products> inventoryMap = new HashMap<>();
+    private String pathIn = "vendingmachine.csv";
+    private File vending = new File(pathIn);
 
-    static Scanner keyboard = new Scanner(System.in);
-    static Map<String, Products> inventoryMap = new HashMap<>();
-    static String pathIn = "vendingmachine.csv";
-    static File vending = new File(pathIn);
+    public VendingMachine(Scanner keyboard) {
+        this.keyboard = keyboard;
+        createInventory();
+    }
 
-    public static void createInventory() {
+    public void createInventory() {
         try (FileReader inventory = new FileReader(vending);
              Scanner fileScanner = new Scanner(vending)) {
             String line = "";
@@ -57,7 +59,7 @@ public class VendingMachine {
 
     }
 
-    public static BigDecimal feedMoney() {
+    public BigDecimal feedMoney() {
         try {
             System.out.println("Your current money is " + getCurrentMoney());
             System.out.println("How much money do you want to feed?");
@@ -72,40 +74,65 @@ public class VendingMachine {
         }
     }
 
-    public static void selectProduct() {
-        // do not create inventory every time, put into constructor of vending machine?
-        createInventory();
+    public void selectProduct() {
         printInventory();
 
         System.out.println("Input key of item to purchase");
         String input = keyboard.nextLine();
-        // check if sold out first, may enter ifs
+
         currentMoney = getCurrentMoney().subtract(inventoryMap.get(input).getItemPrice());
-        System.out.println(currentMoney);
-        // create temp product equal to inventoryMap.get(input)
-        // check if there's enough money
+        if (currentMoney.doubleValue() < 0){
+            System.out.println("Not enough money, sorry! Please feed money.");
+            currentMoney = currentMoney.add(inventoryMap.get(input).getItemPrice());
+        }
+        else {System.out.println(currentMoney);}
 
         if (inventoryMap.get(input).getType().equals("Chip")) {
-            // if Products.updateInventory returns true then print
-            System.out.println("Crunch Crunch, Yum!");
+            if(inventoryMap.get(input).updateInventory()) {
+                System.out.println("Crunch Crunch, Yum!");}
         } else if (inventoryMap.get(input).getType().equals("Drink")) {
-            System.out.println("Glug Glug, Yum!");
+            if(inventoryMap.get(input).updateInventory()){
+            System.out.println("Glug Glug, Yum!");}
         } else if (inventoryMap.get(input).getType().equals("Gum")) {
-            System.out.println("Chew Chew, Yum!");
+            if(inventoryMap.get(input).updateInventory()){
+            System.out.println("Chew Chew, Yum!");}
         } else if (inventoryMap.get(input).getType().equals("Candy")) {
-            System.out.println("Munch Munch, Yum!");
+            if(inventoryMap.get(input).updateInventory()){
+            System.out.println("Munch Munch, Yum!");}
         }
     }
 
-    public static void printInventory(){
-        createInventory();
+    public void printInventory(){
         for (String itemKey : inventoryMap.keySet()){
             System.out.println(itemKey + " | " + inventoryMap.get(itemKey).getItemName() + " | " + inventoryMap.get(itemKey).getItemPrice() + " | " + inventoryMap.get(itemKey).getType());
         }
     }
 
+//    public void writeLogPurchase() {
+//
+//        String logPath = "Log.txt";
+//        File logFile = new File(logPath);
+//
+//        try (PrintWriter logWriter = new PrintWriter(logFile); Scanner fileScanner = new Scanner(logFile)) {
+//
+//            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a"));
+//            BigDecimal newMoney = getCurrentMoney().subtract(inventoryMap.get().getItemPrice());
+//
+//            logWriter.println("\n");
+//
+//            logWriter.println(dateTime + inventoryMap.get().getItemName() + input + inventoryMap.get().getItemPrice() + newMoney);
+//
+//
+//        } catch (FileNotFoundException fnf) {
+//            System.out.println(fnf);
+//        }
+//    }
 
-    public static BigDecimal getCurrentMoney() {
+
+    public BigDecimal getCurrentMoney() {
+//        if(currentMoney.doubleValue() < 0){
+//
+//        }
         return currentMoney;
     }
 }

@@ -1,19 +1,13 @@
 package com.techelevator;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+
 import java.util.Scanner;
 
-public class MainMenu extends VendingMachine {
-
+public class MainMenu  {
 
 
     public static void main(String[] args) {
-
+        Scanner keyboard = new Scanner(System.in);
+        VendingMachine vm = new VendingMachine(keyboard);
         boolean running = true;
         while (running) {
             System.out.println("Welcome to Tech Elevator Vending Machine");
@@ -23,14 +17,14 @@ public class MainMenu extends VendingMachine {
             String input = keyboard.nextLine();
 
             if (input.equals("1")){
-               printInventory();
+               vm.printInventory();
             }
 
             if(input.equals("2")){
 
                 boolean purchasing = true;
                 while(purchasing) {
-                    System.out.println("Your current money is " + getCurrentMoney());
+                    System.out.println("Your current money is " + vm.getCurrentMoney());
                     System.out.println("Choose a option from below.");
                     System.out.println("(1) Feed Money");
                     System.out.println("(2) Select Product");
@@ -39,15 +33,15 @@ public class MainMenu extends VendingMachine {
                     String purchaseInput = keyboard.nextLine();
 
                     if (purchaseInput.equals("1")){
-                        feedMoney();
+                        vm.feedMoney();
                     }
 
                     if (purchaseInput.equals("2")){
-                        selectProduct();
+                        vm.selectProduct();
                     }
 
                     if (purchaseInput.equals("3")) {
-                        System.out.println("Your change is " + getCurrentMoney());
+                        System.out.println("Your change is " + vm.getCurrentMoney());
                         System.exit(0);
                     }
                 }

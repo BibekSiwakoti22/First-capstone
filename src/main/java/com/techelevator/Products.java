@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public abstract class Products extends VendingMachine {
+public abstract class Products {
 
     private String itemName;
     private BigDecimal itemPrice;
@@ -21,6 +21,10 @@ public abstract class Products extends VendingMachine {
         this.itemPrice = itemPrice;
         this.type = type;
         this.amount = 5;
+    }
+
+    public Products() {
+
     }
 
     public boolean updateInventory(){
