@@ -42,6 +42,7 @@ public class MainMenu  {
 
                     if (purchaseInput.equals("3")) {
                         System.out.println("Your change is " + vm.getCurrentMoney());
+                        vm.returnChangeLog();
                         System.exit(0);
                     }
                 }

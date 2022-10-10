@@ -65,8 +65,9 @@ public class VendingMachine  {
             System.out.println("How much money do you want to feed?");
             BigDecimal input = keyboard.nextBigDecimal();
 
-            currentMoney = getCurrentMoney().add(input);
+            writeLogFeed(input);
 
+            currentMoney = getCurrentMoney().add(input);
         } catch (NullPointerException n) {
             n.printStackTrace();
         } finally {
@@ -74,6 +75,22 @@ public class VendingMachine  {
         }
     }
 
+    public void  returnChangeLog() {
+
+        String logPath = "C:\\Users\\Student\\workspace\\capstones\\java-purple-minicapstonemodule1-team4\\src\\main\\resources\\Log.txt";
+        File logFile = new File(logPath);
+         
+        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(logFile, true))) {
+            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a"));
+
+            String line = dateTime + " Return Change: " + "$" + getCurrentMoney() + " $2.00";
+            logWriter.println(line);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void selectProduct() {
         printInventory();
 
@@ -90,15 +107,19 @@ public class VendingMachine  {
         if (inventoryMap.get(input).getType().equals("Chip")) {
             if(inventoryMap.get(input).updateInventory()) {
                 System.out.println("Crunch Crunch, Yum!");}
+                writeLogPurchase(input);
         } else if (inventoryMap.get(input).getType().equals("Drink")) {
             if(inventoryMap.get(input).updateInventory()){
             System.out.println("Glug Glug, Yum!");}
+            writeLogPurchase(input);
         } else if (inventoryMap.get(input).getType().equals("Gum")) {
             if(inventoryMap.get(input).updateInventory()){
             System.out.println("Chew Chew, Yum!");}
+            writeLogPurchase(input);
         } else if (inventoryMap.get(input).getType().equals("Candy")) {
             if(inventoryMap.get(input).updateInventory()){
             System.out.println("Munch Munch, Yum!");}
+            writeLogPurchase(input);
         }
     }
 
@@ -108,31 +129,40 @@ public class VendingMachine  {
         }
     }
 
-//    public void writeLogPurchase() {
-//
-//        String logPath = "Log.txt";
-//        File logFile = new File(logPath);
-//
-//        try (PrintWriter logWriter = new PrintWriter(logFile); Scanner fileScanner = new Scanner(logFile)) {
-//
-//            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a"));
-//            BigDecimal newMoney = getCurrentMoney().subtract(inventoryMap.get().getItemPrice());
-//
-//            logWriter.println("\n");
-//
-//            logWriter.println(dateTime + inventoryMap.get().getItemName() + input + inventoryMap.get().getItemPrice() + newMoney);
-//
-//
-//        } catch (FileNotFoundException fnf) {
-//            System.out.println(fnf);
-//        }
-//    }
+    public void writeLogFeed(BigDecimal input) {
+        String logPath = "C:\\Users\\Student\\workspace\\capstones\\java-purple-minicapstonemodule1-team4\\src\\main\\resources\\Log.txt";
+        File logFile = new File(logPath);
+
+        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(logFile, true))) {
+            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a"));
+
+            String line = dateTime + " FEED MONEY: " + "$" + getCurrentMoney() + " $" + getCurrentMoney().add(input);
+            logWriter.println(line);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void writeLogPurchase(String input) {
+
+        String logPath = "C:\\Users\\Student\\workspace\\capstones\\java-purple-minicapstonemodule1-team4\\src\\main\\resources\\Log.txt";
+        File logFile = new File(logPath);
+
+        try (PrintWriter logWriter = new PrintWriter(new FileOutputStream(logFile, true))) {
+            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a"));
+
+            String line = dateTime + " " + inventoryMap.get(input).getItemName() + " " + input + " $" + inventoryMap.get(input).getItemPrice() + " $" + getCurrentMoney();
+            logWriter.println(line);
+
+            logWriter.flush();
+        } catch (FileNotFoundException fnf) {
+            System.out.println(fnf);
+        }
+    }
 
 
     public BigDecimal getCurrentMoney() {
-//        if(currentMoney.doubleValue() < 0){
-//
-//        }
         return currentMoney;
     }
 }
