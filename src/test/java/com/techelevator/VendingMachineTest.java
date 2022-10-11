@@ -36,10 +36,8 @@ public class VendingMachineTest extends TestCase {
 //    @Test
 //    public void does_extra_decimal_place_break_bigDecimal(){
 //        double test = 2.555;
-//        Scanner keyboard = new Scanner(System.in);
-//        VendingMachine vm = new VendingMachine(keyboard);
 //
-//        Assert.assertEquals(null; vm.feedMoney(););
+//        Assert.assertEquals(null; vm.feedMoney());
 //
 //
 //    }

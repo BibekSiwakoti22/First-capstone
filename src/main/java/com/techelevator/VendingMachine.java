@@ -7,8 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-// Unit Testing
-// Log
+
 public class VendingMachine  {
 
     private BigDecimal currentMoney = BigDecimal.valueOf(2);
@@ -24,8 +23,7 @@ public class VendingMachine  {
     }
 
     public void createInventory() {
-        try (FileReader inventory = new FileReader(vending);
-             Scanner fileScanner = new Scanner(vending)) {
+        try (Scanner fileScanner = new Scanner(vending)) {
             String line = "";
             while (fileScanner.hasNextLine()) {
                 line = fileScanner.nextLine();
@@ -52,9 +50,7 @@ public class VendingMachine  {
                 inventoryMap.put(slot, temp);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
     }
@@ -69,7 +65,7 @@ public class VendingMachine  {
 
             currentMoney = getCurrentMoney().add(input);
         } catch (NullPointerException n) {
-            n.printStackTrace();
+            n.getMessage();
         } finally {
             return currentMoney;
         }
@@ -87,7 +83,7 @@ public class VendingMachine  {
             logWriter.println(line);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
     }
@@ -140,7 +136,7 @@ public class VendingMachine  {
             logWriter.println(line);
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
@@ -157,7 +153,7 @@ public class VendingMachine  {
 
             logWriter.flush();
         } catch (FileNotFoundException fnf) {
-            System.out.println(fnf);
+            fnf.getMessage();
         }
     }
 
